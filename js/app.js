@@ -1,3 +1,4 @@
+// Data
 const loadProducts = () => {
   const data = [
     {
@@ -218,20 +219,29 @@ const showProducts = (products) => {
     const div = document.createElement("div");
     div.classList.add("product");
     div.innerHTML = `<div class="single-product">
-      <div>
+      <div class="img-bg">
     <img class="product-image" src=${image}></img>
       </div>
-      <h3>${product.title}</h3>
-      <p>Category: ${product.category}</p>
-      <p>Rating: ${product.rating.rate}</p> 
-      <p>Rating Count: ${product.rating.count}</p> 
-      <h2>Price: $ ${product.price}</h2>
-      <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="buy-now btn btn-success">Add to Cart</button>
-      <button id="details-btn" class="btn btn-danger">Details</button></div>
+      <div class="py-4 px-2">
+      <h4 class="fw-bold text-success my-3">${product.title.slice(0, 25)}</h4>
+      <p><span class="fw-bold">Category:</span> ${product.category}</p>
+      <p><span class="fw-bold">Rating: </span><i class="fa fa-star text-success" aria-hidden="true"></i>
+      ${product.rating.rate}</p> 
+      <p><span class="fw-bold">Rating Count: </span><i class="fa fa-user text-success" aria-hidden="true"></i>
+      ${product.rating.count}</p> 
+      <h4 class="fw-bold my-4">Price: $ ${product.price}</h4>
+      <button onclick="addToCart(${product.id},${
+      product.price
+    })" id="addToCart-btn" class="buy-now btn btn-success">Add to Cart</button>
+      <button id="details-btn" class="btn btn-danger">Details</button>
+      </div>
+      </div>
       `;
     document.getElementById("all-products").appendChild(div);
   }
 };
+
+// Add to Cart
 let count = 0;
 const addToCart = (id, price) => {
   count = count + 1;
@@ -288,5 +298,3 @@ const updateTotal = () => {
   document.getElementById("total").innerText = grandTotal.toFixed(2);
 };
 loadProducts();
-
-updateTotal();
